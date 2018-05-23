@@ -1,12 +1,12 @@
-# PLAID - the GridPane Stack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+# Webinoly PLAID - the GridPane Stack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
 Optimized LEMP Web Server - Based on Webinoly
 
-This is mostly a non-interactive build/install of the Webinoly stack with customizations specific to the GridPane platform. 
+This is a 100% non-interactive build of the Webinoly stack with customizations specific to the GridPane platform. 
 
-This is currently not meant for "outside consumption" or use with systems other than GridPane.com provisioned VPS nodes. (Though it certainly could be - but you're on your own and YMMV!)
+This is currently not meant for "outside consumption" or use with systems other than GridPane.com provisioned VPS nodes. 
 
-The PLAID stack provides a set of tools and commands that facilitate GridPane powered web server administration.
+The Webinoly PLAID stack provides a set of tools and commands that facilitate GridPane powered web server administration.
 - Unique commands to create, delete, disable sites.
 - Free SSL certificates for your sites with Let’s Encrypt and automatic server configuration.
 - HTTP/2 dramatically increase the speed of serving your content.
@@ -22,7 +22,7 @@ The PLAID stack provides a set of tools and commands that facilitate GridPane po
 
 ```bash
 # Install PLAID stack
-wget -qO gridplaid gridpane.org/gridplaid && sudo bash gridplaid 3
+wget -qO gridplaid gridpane.org/gridplaid && sudo bash gridplaid 3 (coming soon)
 
 # Create your first site.
 gpsite example.com (requires an active GridPane account)
