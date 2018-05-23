@@ -1,12 +1,12 @@
-# Webinoly ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+# PLAID - the GridPane Stack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-Optimized LEMP Web Server.
+Optimized LEMP Web Server - Based on Webinoly
 
-Linux Ubuntu + Nginx + MySQL (MariaDB) + PHP is one of the most reliable and powerful configurations to host your websites.
+This is mostly a non-interactive build/install of the Webinoly stack with customizations specific to the GridPane platform. 
 
-With Webinoly you can set up your web server in just one step.
+This is currently not meant for "outside consumption" or use with systems other than GridPane.com provisioned VPS nodes. (Though it certainly could be - but you're on your own and YMMV!)
 
-Webinoly provides a set of tools and commands that facilitate the web server administration.
+The PLAID stack provides a set of tools and commands that facilitate GridPane powered web server administration.
 - Unique commands to create, delete, disable sites.
 - Free SSL certificates for your sites with Let’s Encrypt and automatic server configuration.
 - HTTP/2 dramatically increase the speed of serving your content.
@@ -21,23 +21,18 @@ Webinoly provides a set of tools and commands that facilitate the web server adm
 ## Usage
 
 ```bash
-# Install Webinoly and LEMP
-wget -qO weby qrok.es/wy && sudo bash weby 3
+# Install PLAID stack
+wget -qO gridplaid gridpane.org/gridplaid && sudo bash gridplaid 3
 
 # Create your first site.
-sudo site example.com -wp
+gpsite example.com (requires an active GridPane account)
 ```
 
 ## Documentation
-For complete documentation, please [visit our site](https://webinoly.com/en/).
-
-## Contributing
-Please open an issue first to discuss what you would like to change.
-
-Also, you can visit our [Community Support Forum](https://webinoly.com/support/)
+COMING SOON!
 
 ## Donations
-If you like Webinoly, buy me a coffee or a beer to show support.
+If you like Webinoly, buy Cristhian a beer to show support.
 
 [![PayPal Donations](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-60px.png)](https://www.paypal.me/qrokes)
 
