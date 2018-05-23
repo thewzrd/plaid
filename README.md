@@ -14,6 +14,7 @@ The Webinoly PLAID stack provides a set of tools and commands that facilitate Gr
 - FastCgi Cache and Redis Object Cache for your WordPress sites.
 - Get an A+ grade on [Qualys (SSL Labs) Test](https://www.ssllabs.com/ssltest/).
 - Log viewer in real time.
+- All other traditional Webinoly functions are here *EXCEPT* for Duply/Duplicity.
 
 ### Requirements
 * Ubuntu 16.04 or 18.04
@@ -32,7 +33,7 @@ gpsite example.com (requires an active GridPane account)
 COMING SOON!
 
 ## Donations
-If you like Webinoly, buy Cristhian a beer to show support.
+Webinoly is a kick ass project and you should buy Cristhian a beer to show support.
 
 [![PayPal Donations](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-60px.png)](https://www.paypal.me/qrokes)
 
