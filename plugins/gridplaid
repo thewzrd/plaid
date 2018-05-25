@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Webinoly Server Manager Plugin
-# Syntax: webinoly <option>
+# GridPlaid Server Manager Plugin
+# Syntax: gridplaid <option>
 # Options: -update, -server-update or -server-reset, -verify, -dbpass, -tools-port, -login-www-data, -nologin-www-data, -config-cache, -uninstall, -config-load, -info, -domain-list-update, -clear-cache
 
 opt="$1"
-source /opt/webinoly/lib/webin
+source /opt/gridplaid/lib/webin
 
 # Extract value if exist
 if [[ $opt == "-tools-port="* || $opt == "-config-cache="* || $opt == "-clear-cache="* || $opt == "-server-update="* || $opt == "-server-reset="* ]]; then
@@ -17,8 +17,8 @@ fi
 
 if [[ $opt == "-update" ]]; then
 	echo ""
-	sudo wget --timeout=15 -qrO weby https://qrok.es/wyupd && sudo bash weby 0
-	echo "${gre}Webinoly App has been updated successfully!${end}"
+	sudo wget --timeout=15 -qrO plaid https://gridpane.com/gridplaid.tar && sudo bash plaid 0
+	echo "${gre}GridPlaid App has been updated successfully!${end}"
 
 	
 elif [[ $opt == "-server-update" || $opt == "-server-reset" ]]; then
@@ -42,8 +42,8 @@ elif [[ $opt == "-server-update" || $opt == "-server-reset" ]]; then
 	
 	# Regenerate PHP conf files
 	if [[ $(conf_read php-optim) == "true" && ( $value == "php" || $value = "all" ) ]]; then
-		sudo cat /opt/webinoly/templates/source/php.ini > /etc/php/$(conf_read php-ver)/fpm/php.ini
-		sudo cat /opt/webinoly/templates/source/www.conf > /etc/php/$(conf_read php-ver)/fpm/pool.d/www.conf
+		sudo cat /opt/gridplaid/templates/source/php.ini > /etc/php/$(conf_read php-ver)/fpm/php.ini
+		sudo cat /opt/gridplaid/templates/source/www.conf > /etc/php/$(conf_read php-ver)/fpm/pool.d/www.conf
 		sudo rm /etc/php/$(conf_read php-ver)/fpm/pool.d/debug.conf
 		php_optim
 		echo "${gre}PHP has been updated successfully!${end}"
@@ -53,7 +53,7 @@ elif [[ $opt == "-server-update" || $opt == "-server-reset" ]]; then
 	
 	
 elif [[ $opt == "-verify" ]]; then
-	webinoly_verify
+	gridplaid_verify
 	
 	
 elif [[ $opt == "-dbpass" ]]; then
@@ -210,7 +210,7 @@ elif [[ $opt == "-config-cache" ]]; then
 	
 elif [[ $opt == "-uninstall" ]]; then
 	echo "${red}"
-	echo " You are about to remove completely Webinoly App from your server!!"
+	echo " You are about to remove completely GridPlaid App from your server!!"
 	echo "${blu}     Are you sure [y/N]? "
 	while read -r -n 1 -s answer; do
 	  answer=${answer:-n}
@@ -225,14 +225,14 @@ elif [[ $opt == "-uninstall" ]]; then
 				sudo apt-get -y -qq autoremove > /dev/null
 				conf_write pre-packs purged
 			fi
-			sudo mv /opt/webinoly/webinoly.conf $HOME/.webinoly-conf-restore_dont-remove
-			sudo rm -rf /opt/webinoly
-			sudo rm /usr/bin/webinoly
+			sudo mv /opt/gridplaid/gridplaid.conf $HOME/.gridplaid-conf-restore_dont-remove
+			sudo rm -rf /opt/gridplaid
+			sudo rm /usr/bin/gridplaid
 			sudo rm /usr/bin/stack
 			sudo rm /usr/bin/site
 			sudo rm /usr/bin/httpauth
 			sudo rm /usr/bin/log			
-			echo "${gre}  Webinoly App has been removed successfully from your server!"
+			echo "${gre}  GridPlaid App has been removed successfully from your server!"
 			echo "${end}"
 			exit 1;
 		else
@@ -261,7 +261,7 @@ elif [[ $opt == "-domain-list-update" ]]; then
 		sudo sed -i '/^$/d' /tmp/temp-public_suffix_list.dat
 		sudo sed -i 's/[!]\+//g' /tmp/temp-public_suffix_list.dat
 		sudo sed -i 's/^\*\.\+//g' /tmp/temp-public_suffix_list.dat
-		sudo mv /tmp/temp-public_suffix_list.dat /opt/webinoly/lib/public_suffix_list.dat
+		sudo mv /tmp/temp-public_suffix_list.dat /opt/gridplaid/lib/public_suffix_list.dat
 		echo "${gre}Domain list has been successfully updated!${end}"
 	else
 		echo "${red}[ERROR] Domain list not updated!${end}"

@@ -12,9 +12,9 @@ domain="$1"
 type="$2"
 cache="$3"
 
-source /opt/webinoly/lib/general
-source /opt/webinoly/lib/sites
-source /opt/webinoly/lib/site-ssl
+source /opt/gridplaid/lib/general
+source /opt/gridplaid/lib/sites
+source /opt/gridplaid/lib/site-ssl
 
 if [[ ! $(conf_read nginx) == "true" ]]; then
 	echo ""
@@ -50,7 +50,7 @@ if [[ -n $domain && $type =~ ^(-html|-php|-mysql|-wp|-wpsubdir|-wpsubdom|-parked
 	count=1
 	while true; do
 		tld=$(echo "${domain}" | rev | cut -d'.' -f -$count -s | rev)
-		if ! grep -Fxq "$tld" /opt/webinoly/lib/public_suffix_list.dat; then
+		if ! grep -Fxq "$tld" /opt/gridplaid/lib/public_suffix_list.dat; then
 			break
 		fi
 		count=$[$count+1]
@@ -247,7 +247,7 @@ elif [[ "$type" == "-proxy" ]]; then
 	sudo sed -i '/include /d' /etc/nginx/sites-available/$domain
 	sudo sed -i '/root /d' /etc/nginx/sites-available/$domain
 	sudo sed -i '/index /d' /etc/nginx/sites-available/$domain
-	sudo sed -i '/error_log /r /opt/webinoly/templates/template-site-proxy' /etc/nginx/sites-available/$domain
+	sudo sed -i '/error_log /r /opt/gridplaid/templates/template-site-proxy' /etc/nginx/sites-available/$domain
 	
 	if [[ -n $value ]]; then
 		rphost=$(echo "${value}" | cut -d':' -f 1 -s)

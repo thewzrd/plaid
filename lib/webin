@@ -1,34 +1,34 @@
 #!/bin/bash
-source /opt/webinoly/lib/install
+source /opt/gridplaid/lib/install
 
 
 # Verify Integrity of all "required" files and system
-webinoly_verify() {
+gridplaid_verify() {
 	local error="0"
 	local warning="0"
 	local info="0"
-	echo "${gre} Verifying integrity of the entire Webinoly system... ${end}"
+	echo "${gre} Verifying integrity of the entire GridPlaid system... ${end}"
 	echo "${red}"
 	
-	# Webinoly
-	if [[ ! -a /opt/webinoly/lib/general ]]; then
-		echo "[ERROR] File: /opt/webinoly/lib/general not found!"
+	# GridPlaid
+	if [[ ! -a /opt/gridplaid/lib/general ]]; then
+		echo "[ERROR] File: /opt/gridplaid/lib/general not found!"
 		error="1"
 	fi
-	if [[ ! -a /opt/webinoly/lib/install ]]; then
-		echo "[ERROR] File: /opt/webinoly/lib/install not found!"
+	if [[ ! -a /opt/gridplaid/lib/install ]]; then
+		echo "[ERROR] File: /opt/gridplaid/lib/install not found!"
 		error="1"
 	fi
-	if [[ ! -a /opt/webinoly/templates/template-site-php ]]; then
-		echo "[ERROR] File: /opt/webinoly/templates/template-site-php not found!"
+	if [[ ! -a /opt/gridplaid/templates/template-site-php ]]; then
+		echo "[ERROR] File: /opt/gridplaid/templates/template-site-php not found!"
 		error="1"
 	fi
-	if [[ ! -a /opt/webinoly/webinoly.conf ]]; then
-		echo "[ERROR] File: /opt/webinoly/webinoly.conf not found!"
+	if [[ ! -a /opt/gridplaid/gridplaid.conf ]]; then
+		echo "[ERROR] File: /opt/gridplaid/gridplaid.conf not found!"
 		error="1"
 	fi
-	if [[ ! -a /usr/bin/webinoly ]]; then
-		echo "[ERROR] File: /usr/bin/webinoly not found!"
+	if [[ ! -a /usr/bin/gridplaid ]]; then
+		echo "[ERROR] File: /usr/bin/gridplaid not found!"
 		error="1"
 	fi
 	if [[ ! -a /usr/bin/site ]]; then
@@ -57,14 +57,14 @@ webinoly_verify() {
 		echo "[ERROR] File: /etc/nginx/nginx.conf not found!"
 		error="1"
 	elif [[ -a /etc/nginx/nginx.conf && $(conf_read nginx) != "true" ]]; then
-		echo "[WARNING] Seems like NGINX is installed but Webinoly can not detect it!"
+		echo "[WARNING] Seems like NGINX is installed but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	if [[ ! -a /etc/nginx/fastcgi.conf && $(conf_read nginx) == "true" ]]; then
 		echo "[ERROR] File: /etc/nginx/fastcgi.conf not found!"
 		error="1"
 	elif [[ -a /etc/nginx/fastcgi.conf && $(conf_read nginx) != "true" ]]; then
-		echo "[WARNING] Seems like NGINX is installed but Webinoly can not detect it!"
+		echo "[WARNING] Seems like NGINX is installed but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	
@@ -90,7 +90,7 @@ webinoly_verify() {
 		error="1"
 	fi
 	if [[ ! -a /etc/nginx/common/acl.conf && $(conf_read nginx-optim) == "true" ]]; then
-		echo "[ERROR] File: /etc/nginx/common/acl.conf not found!"
+		echo "[ERROR] File: /etc/nginx/common/acl.conf not found!"gridplaid
 		error="1"
 	fi
 	if [[ ! -a /etc/nginx/common/locations.conf && $(conf_read nginx-optim) == "true" ]]; then
@@ -119,14 +119,14 @@ webinoly_verify() {
 		echo "[ERROR] File: /etc/nginx/sites-available/$(conf_read tools-port) not found!"
 		error="1"
 	elif [[ -a /etc/nginx/sites-available/$(conf_read tools-port) && $(conf_read nginx-tool) != "true" ]]; then
-		echo "[WARNING] Seems like Nginx Tools are enabled but Webinoly can not detect it!"
+		echo "[WARNING] Seems like Nginx Tools are enabled but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	if [[ ! -d /var/www/$(conf_read tools-port) && $(conf_read nginx-tool) == "true" ]]; then
 		echo "[ERROR] Folder: /var/www/$(conf_read tools-port) not found!"
 		error="1"
 	elif [[ -d /var/www/$(conf_read tools-port) && $(conf_read nginx-tool) != "true" ]]; then
-		echo "[WARNING] Seems like Nginx Tools are enabled but Webinoly can not detect it!"
+		echo "[WARNING] Seems like Nginx Tools are enabled but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	
@@ -141,7 +141,7 @@ webinoly_verify() {
 		echo "[ERROR] File: /etc/php/$(conf_read php-ver)/fpm/php.ini not found!"
 		error="1"
 	elif [[ -a /etc/php/$(conf_read php-ver)/fpm/php.ini && $(conf_read php) != "true" ]]; then
-		echo "[WARNING] Seems like PHP is installed but Webinoly can not detect it!"
+		echo "[WARNING] Seems like PHP is installed but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	
@@ -164,21 +164,21 @@ webinoly_verify() {
 		echo "[ERROR] File: /var/www/$(conf_read tools-port)/htdocs/fpm/status/php not found!"
 		error="1"
 	elif [[ -a /var/www/$(conf_read tools-port)/htdocs/fpm/status/php && $(conf_read php-tool) != "true" ]]; then
-		echo "[WARNING] Seems like PHP Tools are enabled but Webinoly can not detect it!"
+		echo "[WARNING] Seems like PHP Tools are enabled but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	if [[ ! -a /var/www/$(conf_read tools-port)/htdocs/fpm/status/debug && $(conf_read php-tool) == "true" ]]; then
 		echo "[ERROR] File: /var/www/$(conf_read tools-port)/htdocs/fpm/status/debug not found!"
 		error="1"
 	elif [[ -a /var/www/$(conf_read tools-port)/htdocs/fpm/status/debug && $(conf_read php-tool) != "true" ]]; then
-		echo "[WARNING] Seems like PHP Tools are enabled but Webinoly can not detect it!"
+		echo "[WARNING] Seems like PHP Tools are enabled but GridPlaid can not detect it!"
 		error="1"
 	fi
 	if [[ ! -a /var/www/$(conf_read tools-port)/htdocs/php/index.php && $(conf_read php-tool) == "true" ]]; then
 		echo "[ERROR] File: /var/www/$(conf_read tools-port)/htdocs/php/index.php not found!"
 		error="1"
 	elif [[ -a /var/www/$(conf_read tools-port)/htdocs/php/index.php && $(conf_read php-tool) != "true" ]]; then
-		echo "[WARNING] Seems like PHP Tools are enabled but Webinoly can not detect it!"
+		echo "[WARNING] Seems like PHP Tools are enabled but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	
@@ -193,7 +193,7 @@ webinoly_verify() {
 		echo "[ERROR] Folder: /etc/mysql not found!"
 		error="1"
 	elif [[ -d /etc/mysql && $(conf_read mysql) != "true" ]]; then
-		echo "[WARNING] Seems like MySQL is installed but Webinoly can not detect it!"
+		echo "[WARNING] Seems like MySQL is installed but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	
@@ -202,7 +202,7 @@ webinoly_verify() {
 		echo "[ERROR] Folder: /var/www/$(conf_read tools-port)/htdocs/pma not found!"
 		error="1"
 	elif [[ ( -d /var/www/$(conf_read tools-port)/htdocs/pma || -d /usr/share/phpmyadmin ) && $(conf_read mysql-tool) != "true" ]]; then
-		echo "[WARNING] Seems like MySQL Tools (PhpMyAdmin) are enabled but Webinoly can not detect it!"
+		echo "[WARNING] Seems like MySQL Tools (PhpMyAdmin) are enabled but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	
@@ -230,7 +230,7 @@ webinoly_verify() {
 		error="1"
 	fi
 	if [[ ( -d /etc/redis || -d /etc/postfix || -a /usr/bin/duplicity || -a /usr/bin/letsencrypt ) && $(conf_read web-tool) != "true" ]]; then
-		echo "[WARNING] Seems like Web Tools (Redis, Letsencrypt, Postfix and Duplicity) are enabled but Webinoly can not detect it!"
+		echo "[WARNING] Seems like Web Tools (Redis, Letsencrypt, Postfix and Duplicity) are enabled but GridPlaid can not detect it!"
 		warning="1"
 	fi
 	
@@ -254,17 +254,17 @@ webinoly_verify() {
 
 
 conf_load_read() {
-	local val=$(grep -F "${1}:" $HOME/webinoly.conf | cut -f 2 -d ':')
+	local val=$(grep -F "${1}:" $HOME/gridplaid.conf | cut -f 2 -d ':')
 	echo $val
 }
 config_load() {
-	webinoly -verify
-	if [[ $? == 1 || ! -a $HOME/webinoly.conf ]]; then
+	gridplaid -verify
+	if [[ $? == 1 || ! -a $HOME/gridplaid.conf ]]; then
 		echo "${red}  Configuration file not found or is corrupted! ${end}"
 		exit 1
 	fi
 	
-	if [[ -a /opt/webinoly/webinoly.conf ]]; then
+	if [[ -a /opt/gridplaid/gridplaid.conf ]]; then
 		echo "${blu}"
 		echo " What do you want to do with your actual configuration [ P=Purge O=Overwrite C=Cancel ]? "
 		while read -r -n 1 -s answer; do
@@ -288,7 +288,7 @@ config_load() {
 		echo "${end}"
 	fi
 	
-	#sudo mv $HOME/webinoly.conf /opt/webinoly/
+	#sudo mv $HOME/gridplaid.conf /opt/gridplaid/
 
 	# Check for system variables before stack
 	if [[ -n $(conf_load_read swap-mem) ]]; then
@@ -346,13 +346,13 @@ config_load() {
 	
 	# Some user preferences
 	if [[ -n $(conf_load_read tools-port) ]]; then
-		webinoly -tools-port $(conf_load_read tools-port)
+		gridplaid -tools-port $(conf_load_read tools-port)
 	fi
 	if [[ -n $(conf_load_read fastcgi-conf) ]]; then
-		webinoly -config-cache $(conf_load_read fastcgi-conf)
+		gridplaid -config-cache $(conf_load_read fastcgi-conf)
 	fi
 	if [[ $(conf_load_read login-www-data) == "true" ]]; then
-		webinoly -login-www-data
+		gridplaid -login-www-data
 	fi
 	if [[ $(conf_load_read wp-admin-auth) == "purged" ]]; then
 		httpauth -wp-admin-off
@@ -428,8 +428,8 @@ system_info() {
 	fi
 
 	echo "[Raw Conf]"
-	if [[ -a /opt/webinoly/webinoly.conf ]]; then
-		sudo cat /opt/webinoly/webinoly.conf
+	if [[ -a /opt/gridplaid/gridplaid.conf ]]; then
+		sudo cat /opt/gridplaid/gridplaid.conf
 	else
 		echo "${red} [ERROR] Configuration File not found! ${blu}"
 	fi

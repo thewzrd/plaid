@@ -5,8 +5,8 @@
 # Options: -html, -nginx, -php, -lemp, -mysql, -pma, -info, -purge-server-all, -web-tools, -php-ver
 # Arguments: -purge, -notools, -noptim
 
-source /opt/webinoly/lib/install
-source /opt/webinoly/lib/webin
+source /opt/gridplaid/lib/install
+source /opt/gridplaid/lib/webin
 opt="$1"
 arg="$2"
 
@@ -108,7 +108,7 @@ elif [[ $arg == "-purge" && $opt == "-php" ]]; then
 	echo | sudo add-apt-repository --remove 'ppa:chris-lea/redis-server'
 	sudo apt-get -y autoremove
 	sudo rm -rf /etc/php
-	sudo rm /opt/webinoly/templates/source/*
+	sudo rm /opt/gridplaid/templates/source/*
 
 	conf_write php purged
 	conf_write php-optim purged
@@ -214,7 +214,7 @@ elif [[ $arg == "-purge" && $opt == "-web-tools" ]]; then
 
 elif [[ $arg == "-purge" && $opt == "-lemp" ]]; then
 	echo ""
-	echo "${red}If you want to remove Webinoly Stack completely from your server use the '-purge-server-all' option or remove each package individually.  ${end}"
+	echo "${red}If you want to remove GridPlaid Stack completely from your server use the '-purge-server-all' option or remove each package individually.  ${end}"
 	echo ""
 	
 elif [[ $arg != "-purge" && $arg != "-notools" && -n "$arg" ]]; then
@@ -230,14 +230,14 @@ elif [[ $opt == "-html" || $opt == "-nginx" ]]; then
 		nginx_optim
 		[[ $arg != "-notools" ]] && nginx_tool		
 		echo ""
-		echo "${gre}Nginx has been successfully Optimized by Webinoly! ${end}"
+		echo "${gre}Nginx has been successfully Optimized by GridPlaid! ${end}"
 		echo ""
 	else
 		echo "${red}Nginx is already installed!${end}"
 		if [[ $(conf_read nginx-optim) != "true" ]]; then
 			nginx_optim
 			echo "${gre}"
-			echo "NGINX has been successfully Optimized by Webinoly!"
+			echo "NGINX has been successfully Optimized by GridPlaid!"
 			echo "${end}"
 		fi
 		if [[ $(conf_read nginx-tool) != "true" && $arg != "-notools" ]]; then
@@ -262,14 +262,14 @@ elif [[ $opt == "-php" ]]; then
 		def=$(conf_read php-ver)
 		[[ $arg != "-notools" && $(conf_read php-tool) != "true" ]] && php_tool
 		echo ""
-		echo "${gre}PHP has been successfully Optimized by Webinoly! ${end}"
+		echo "${gre}PHP has been successfully Optimized by GridPlaid! ${end}"
 		echo ""
 	else
 		echo "${red}PHP is already installed!${end}"
 		if [[ $(conf_read php-optim) != "true" ]]; then
 			php_optim
 			echo "${gre}"
-			echo "PHP has been successfully Optimized by Webinoly!"
+			echo "PHP has been successfully Optimized by GridPlaid!"
 			echo "${end}"
 		fi
 		if [[ $(conf_read php-tool) != "true" && $arg != "-notools" ]]; then
@@ -348,10 +348,10 @@ elif [[ $opt == "-info" ]]; then
 	system_info
 elif [[ $opt == "-purge-server-all" ]]; then
 	echo ""
-	echo "${red} ¡ C A U T I O N !  You are about to remove Webinoly Stack completely from your server!"
+	echo "${red} ¡ C A U T I O N !  You are about to remove GridPlaid Stack completely from your server!"
 	echo " This action will remove Nginx, PHP, MySQL and all the other tools, all your sites will remain in the server but will be publicly unavailable after this action."
 	echo ""
-	echo " If you want to remove your sites data use the webinoly command: 'sudo webinoly -delete-all'"
+	echo " If you want to remove your sites data use the gridplaid command: 'sudo gridplaid -delete-all'"
 	echo ""
 
 	conf_write force-flag true
@@ -362,8 +362,7 @@ elif [[ $opt == "-purge-server-all" ]]; then
 	
 	echo "${gre}"
 	echo "****************************************************************************"
-	echo "***     Webinoly Stack have been completely removed from your server     ***"
-	echo "****         We are sad because you decided to remove Webinoly!!        ****"
+	echo "***    	 The GridPlaid Stack has been removed from your server         ***"
 	echo "****************************************************************************"
 	echo "${end}"
 

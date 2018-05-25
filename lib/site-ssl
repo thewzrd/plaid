@@ -3,7 +3,7 @@
 # This is a library for Site Manager Plugin
 # Functions for SSL On/Off
 
-source /opt/webinoly/lib/general
+source /opt/gridplaid/lib/general
 
 site_ssl_on() {
 	local cermail=$(conf_read mail)
@@ -68,12 +68,12 @@ site_ssl_on() {
 		sudo sed -i '/listen 80/c \	listen 443 ssl http2;' /etc/nginx/sites-available/$domain
 		sudo sed -i '/listen \[::\]:80/c \	listen [::]:443 ssl http2;' /etc/nginx/sites-available/$domain
 		sudo sed -i '/headers-html.conf/a \	include common/headers-https.conf;' /etc/nginx/sites-available/$domain
-		sudo sed -i '/server_name /r /opt/webinoly/templates/template-site-ssl' /etc/nginx/sites-available/$domain
-		sudo sed -i "/WebinolySSLstart/,/WebinolySSLend/{s/domain.com/$domain/}" /etc/nginx/sites-available/$domain
+		sudo sed -i '/server_name /r /opt/gridplaid/templates/template-site-ssl' /etc/nginx/sites-available/$domain
+		sudo sed -i "/GridPlaidSSLstart/,/GridPlaidSSLend/{s/domain.com/$domain/}" /etc/nginx/sites-available/$domain
 		
 		# HTTP to HTTPS Redirection
 		local sername=$(grep -w "server_name .*;" /etc/nginx/sites-available/$domain)
-		sudo sed -i '1r /opt/webinoly/templates/template-site-sslredirect' /etc/nginx/sites-available/$domain
+		sudo sed -i '1r /opt/gridplaid/templates/template-site-sslredirect' /etc/nginx/sites-available/$domain
 		sudo sed -i "/#server_name;/c \	$sername" /etc/nginx/sites-available/$domain
 		
 		# Auto-Renew Certificate
@@ -100,8 +100,8 @@ site_ssl_off() {
 	sudo sed -i '/listen 443/c \	listen 80;' /etc/nginx/sites-available/$domain
 	sudo sed -i '/listen \[::\]:443/c \	listen [::]:80;' /etc/nginx/sites-available/$domain
 	sudo sed -i '/headers-https.conf/d' /etc/nginx/sites-available/$domain
-	sudo sed -i '/WebinolySSLstart/,/WebinolySSLend/{/.*/d}' /etc/nginx/sites-available/$domain
-	sudo sed -i '/WebinolySSLredirectStart/,/WebinolySSLredirectEnd/{/.*/d}' /etc/nginx/sites-available/$domain
+	sudo sed -i '/GridPlaidSSLstart/,/GridPlaidSSLend/{/.*/d}' /etc/nginx/sites-available/$domain
+	sudo sed -i '/GridPlaidSSLredirectStart/,/GridPlaidSSLredirectEnd/{/.*/d}' /etc/nginx/sites-available/$domain
 	
 	if [[ -n $value && $value == "force" ]]; then
 		answer=="N"

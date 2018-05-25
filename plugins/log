@@ -5,7 +5,7 @@
 # Options: -wp, -error (access log is default and have no option)
 # Notes: If no domain is entered, access logs are displayed.
 
-source /opt/webinoly/lib/general
+source /opt/gridplaid/lib/general
 domain="$1"
 opt="$2"
 

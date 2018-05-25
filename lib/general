@@ -32,7 +32,7 @@ db_delete() {
 		if [[ $host == "localhost" ]]; then
 			# Check if MySQL installed
 			if [[ ! -d /etc/mysql || $(conf_read mysql) != "true" ]]; then
-				echo "${red}[ERROR] Seems like MySQL is not installed or Webinoly can not detect it! ( $domain ) ${end}"
+				echo "${red}[ERROR] Seems like MySQL is not installed or GridPlaid can not detect it! ( $domain ) ${end}"
 			fi
 			local ROOT_PASS=$( echo $(conf_read mysql-root) | openssl enc -d -a -salt )
 			sudo mysql --connect-timeout=10 --user=root -p$ROOT_PASS -e "$dbsetup"
@@ -105,7 +105,7 @@ check_osname() {
 	if ! [[ $distr == "Ubuntu" && $osver =~ ^(trusty|xenial|zesty|artful|bionic)$ ]]; then
 		echo "${red}" >&2
 		echo "****************************************************************************" >&2
-		echo "****  This OS is not supported by Webinoly and could not work properly  ****" >&2
+		echo "****  This OS is not supported by GridPlaid and could not work properly  ****" >&2
 		echo "****************************************************************************" >&2
 		echo "${end}" >&2
 	fi
@@ -164,17 +164,17 @@ tools_port() {
 
 
 conf_read() {
-	local val=$(grep -w "^${1}:.*" /opt/webinoly/webinoly.conf | cut -f 2 -d ':')
+	local val=$(grep -w "^${1}:.*" /opt/gridplaid/gridplaid.conf | cut -f 2 -d ':')
 	echo $val
 }
 
 conf_write() {
-	[[ ! -a /opt/webinoly/webinoly.conf ]] && sudo touch /opt/webinoly/webinoly.conf
+	[[ ! -a /opt/gridplaid/gridplaid.conf ]] && sudo touch /opt/gridplaid/gridplaid.conf
 	#if requested VAR exists overwrite it, if not, create it.
-	sed -i "/^${1}:/d" /opt/webinoly/webinoly.conf
-	sh -c "echo -n '$1:$2\n' >> /opt/webinoly/webinoly.conf"
+	sed -i "/^${1}:/d" /opt/gridplaid/gridplaid.conf
+	sh -c "echo -n '$1:$2\n' >> /opt/gridplaid/gridplaid.conf"
 }
 
 conf_delete() {
-	sed -i "/^${1}:/d" /opt/webinoly/webinoly.conf
+	sed -i "/^${1}:/d" /opt/gridplaid/gridplaid.conf
 }
