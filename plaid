@@ -37,26 +37,9 @@ done
 
 
 # Download and install GridPlaid
-if [[ $2 == "-ver="* ]]; then
-	ver=$(echo "$2" | cut -d'=' -f 2 -s)	
-	# Be sure we have a valid server response for the requested version
-	code=$(wget --server-response --spider https://gridpane.com/gridplaid?version=$ver 2>&1 | awk '/^  HTTP/{print $2}')
-	# Get the last code (redirections)
-	code="${code##*$'\n'}"
 
-	echo "$(tput setaf 1)"
-	if [[ $code == 200 ]]; then
-		sudo wget --timeout=15 -qrO $HOME/gridplaid.tar https://gridpane.com/gridplaid?version=$ver
-		plaidversion="$ver"
-		[[ $ver == "beta" ]] && echo "[WARNING] You are installing a BETA version of GridPlaid and it's not recommended for production enviroments."
-	else
-		echo "[ERROR] Version not found or not available! ($code) $(tput sgr0)"
-		exit 1
-	fi
-	echo $(tput sgr0)
-else
-	sudo wget --timeout=15 -qrO $HOME/gridplaid.tar https://gridpane.com/gridplaid.tar
-fi
+sudo wget --timeout=15 -qrO $HOME/gridplaid.tar https://gridpane.com/gridplaid.tar
+
 
 [[ ! -d /opt/gridplaid ]] && sudo mkdir /opt/gridplaid
 sudo tar -xf $HOME/gridplaid.tar -C /opt/gridplaid
