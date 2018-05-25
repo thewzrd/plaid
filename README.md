@@ -1,12 +1,12 @@
-# Webinoly PLAID - the GridPane Stack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+# PLAID - the GridPane Stack ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-Optimized LEMP Web Server - Based on Webinoly
+Highly Optimized LEMP7+ Web Server 
 
-This is a 100% non-interactive build of the Webinoly stack with customizations specific to the GridPane platform. 
+This is a 100% non-interactive build of a LEMP stack with customizations specific to the GridPane platform. 
 
-This is currently not meant for "outside consumption" or use with systems other than GridPane.com provisioned VPS nodes. 
+This is currently not meant for outside consumption or use with systems other than GridPane.com provisioned VPS nodes. 
 
-The Webinoly PLAID stack provides a set of tools and commands that facilitate GridPane powered web server administration.
+The PLAID stack provides a set of tools and commands that facilitate GridPane powered web server administration.
 - Unique commands to create, delete, disable sites.
 - Free SSL certificates for your sites with Let’s Encrypt and automatic server configuration.
 - HTTP/2 dramatically increase the speed of serving your content.
@@ -14,7 +14,6 @@ The Webinoly PLAID stack provides a set of tools and commands that facilitate Gr
 - FastCgi Cache and Redis Object Cache for your WordPress sites.
 - Get an A+ grade on [Qualys (SSL Labs) Test](https://www.ssllabs.com/ssltest/).
 - Log viewer in real time.
-- All other traditional Webinoly functions are here *EXCEPT* for Duply/Duplicity.
 
 ### Requirements
 * Ubuntu 16.04 or 18.04
@@ -23,7 +22,7 @@ The Webinoly PLAID stack provides a set of tools and commands that facilitate Gr
 
 ```bash
 # Install PLAID stack
-wget -qO gridplaid gridpane.org/gridplaid && sudo bash gridplaid 3 (coming soon)
+wget -qO gridplaid gridpane.org/gridplaid && sudo bash gridplaid 3 
 
 # Create your first site.
 gpsite example.com (requires an active GridPane account)
@@ -32,10 +31,8 @@ gpsite example.com (requires an active GridPane account)
 ## Documentation
 COMING SOON!
 
-## Donations
-Webinoly is a kick ass project and you should buy Cristhian a beer to show support.
-
-[![PayPal Donations](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-60px.png)](https://www.paypal.me/qrokes)
+## Roots
+PLAID is a fork of Webinoly. You can find out more at (webinoly.com)
 
 ## License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
