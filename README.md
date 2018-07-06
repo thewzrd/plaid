@@ -31,8 +31,5 @@ gpsite example.com (requires an active GridPane account)
 ## Documentation
 COMING SOON!
 
-## Roots
-PLAID is a fork of Webinoly. You can find out more at (webinoly.com)
-
 ## License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
