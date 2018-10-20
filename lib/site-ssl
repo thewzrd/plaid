@@ -64,7 +64,7 @@ site_ssl_on() {
 	fi
 	
 	# SSL Nginx Conf
-	if [[ -a /etc/letsencrypt/live/$root/fullchain.pem ]]; then
+	if [[ -a /etc/letsencrypt/live/$domain/fullchain.pem ]]; then
 		sudo sed -i '/listen 80/c \	listen 443 ssl http2;' /etc/nginx/sites-available/$domain
 		sudo sed -i '/listen \[::\]:80/c \	listen [::]:443 ssl http2;' /etc/nginx/sites-available/$domain
 		sudo sed -i '/headers-html.conf/a \	include common/headers-https.conf;' /etc/nginx/sites-available/$domain
